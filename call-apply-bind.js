@@ -89,3 +89,65 @@ console.log( multiplyByThree() );
 var a = ['zero', 'one', 'two', 'three'];
 var sliced = a.slice();
 console.log(sliced);
+
+
+//borrowing with bind
+var healthyfoods = {
+    items: [
+        {name:"apple", category:"fruit"},
+        {name:"spinach", category:"vegetable"}
+    ],
+    displayFirstFood: function(){
+        return this.items[0].name;
+    }
+}
+console.log('First food is : ' + healthyfoods.displayFirstFood());
+
+var junkfoods = {
+    items: [
+        {name:"mac & cheese", category:"carbs"},
+        {name:"steak", category:"meats"}
+    ]
+}
+
+var displayFirstJunk = healthyfoods.displayFirstFood.bind(junkfoods);
+console.log("First Junk is " + displayFirstJunk());
+
+var myArrayObject = {
+    key1: "value 1",
+    key2: "value 1",
+    method1: function() {},
+    method2: function() {},
+    0: "Boobie Flay",
+    1: "40",
+    2: ["rice", "beans", "broccoli"],
+    length: 3 
+};
+
+var newArray = Array.prototype.slice.call(myArrayObject, 0);
+console.log(newArray);
+
+var myIndexOf = Array.prototype.indexOf.call(myArrayObject, "Boobie Flay");
+if(myIndexOf === -1) {
+    console.log('user not found');
+} else {
+    console.log('found user');
+}
+
+var myReverse = Array.prototype.reverse.call(myArrayObject);
+console.log(myReverse);
+var myPush = Array.prototype.push.call(myArrayObject, "push test");
+console.log(myArrayObject);
+var myPop = Array.prototype.pop.call(myArrayObject);
+console.log(myArrayObject);
+
+
+function funcArguments(params) {
+    var args = Array.prototype.slice.call(arguments, 0);
+    console.log(args); //[ 'a', 'b', 'c', 'd' ]
+}
+funcArguments("a", "b", "c", "d");
+
+var myMagicNums = [2, 3, 45, 78, 123, 37, 111];
+var maxMagic = Math.max.apply(Math, myMagicNums);
+console.log(maxMagic)
